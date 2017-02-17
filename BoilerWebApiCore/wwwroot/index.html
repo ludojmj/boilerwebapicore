@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Test WebAPI</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <h1>Test WebAPI</h1>
+    <p id="results">...</p>
+    <br />
+    <br />
+    <p>
+        Sync methods
+    </p>
+    <button class="ko" id="productKo" data-url="api/product?id=1">GET: Sync KO (business error - Test our user message when id == 1)</button>
+    <br />
+    <br />
+    <button class="ok" id="productOk" data-url="api/product?id=0">GET: Sync OK</button>
+    <br />
+    <br />
+    <button class="ko" id="otherProductKo" data-url="api/otherproduct">POST: Sync KO (bug => divide exception - Test bugg in app if input.Id == "1")</button>
+    <br />
+    <br />
+    <button class="ok" id="otherProductOk" data-url="api/otherproduct">POST: Sync OK</button>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <p>
+        Async methods
+    </p>
+    <button class="ko" id="productAsyncKo" data-url="api/product/async?id=1">GET: Async KO (business error - Test our user message when id == 1)</button>
+    <br />
+    <br />
+    <button class="ok" id="productAsyncOk" data-url="api/product/async?id=0">GET: Async OK</button>
+    <br />
+    <br />
+    <button class="ko" id="otherProductAsyncKo" data-url="api/otherproduct/async">POST: Async KO (bug => divide exception - Test bugg in app if input.Id == "1")</button>
+    <br />
+    <br />
+    <button class="ok" id="otherProductAsyncOk" data-url="api/otherproduct/async">POST: Async OK</button>
+
+    <script src="index.js" async></script>
+</body>
+</html>

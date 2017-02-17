@@ -1,0 +1,9 @@
+﻿.ok {
+	background: green;
+	color: white;
+	border: 1px solid #f7941e;
+}
+.ko {
+	background: red;
+	color: white;
+}

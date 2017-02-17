@@ -1,0 +1,9 @@
+{
+  "projects": [
+    "BoilerWebApiCore",
+    "BoilerWebApiCore.UnitTest"
+  ],
+  "sdk": {
+    "version": "1.0.0-rc4-004771"
+  }
+}
