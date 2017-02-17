@@ -24,19 +24,20 @@ $ dotnet build
 $ dotnet test
 
 $ cd ../BoilerWebApiCore
+$ export ASPNETCORE_ENVIRONMENT=Development
 $ dotnet run
 ```
 
 * Front-end:
-  * /BoilerWebApiCore/wwwroot/index.html + index.js + index.css
+  * wwwroot/index.html + index.js + index.css
 
 * Back-end:
-  * /BoilerWebApiCore/Controllers/ProductController.cs
-  * /BoilerWebApiCore/Controllers/OtherProductController.cs
+  * Controllers/ProductController.cs
+  * Controllers/OtherProductController.cs
 
 ## Swagger
 * Launch the http server:
-  * dotnet boilerwebapicore/BoilerWebApiCore/bin/Debug/netcoreapp1.0/**BoilerWebApiCore.dll**
+  * dotnet bin/Debug/netcoreapp1.0/**BoilerWebApiCore.dll**
 
 * Open the url:
   * http://localhost:5000/swagger
@@ -82,7 +83,7 @@ $ dotnet run
     >  ==> POST OK
 
 
-#### BoilerWebApiCore.Repository
+#### BoilerWebApiCore/Repository
 
 * IProductRepo.cs
 * IOtherProductRepo.cs
@@ -91,12 +92,12 @@ $ dotnet run
 * OtherProductRepo.cs
 
 
-#### BoilerWebApiCore.Models
+#### BoilerWebApiCore/Models
 
 * Product.cs
 
 
-#### BoilerWebApiCore.Shared
+#### BoilerWebApiCore/Shared
 
 * ErrorContent.cs
   > ==> Formatted message object { Message, MessageDetail }
@@ -105,4 +106,4 @@ $ dotnet run
   > ==> Voluntary BusinessException
 
 * GlobalExceptionHandler.cs : ExceptionHandler
-  >  ==> Exceptions shielding + logging
+  >  ==> Exception shielding + logging
