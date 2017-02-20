@@ -20,7 +20,6 @@ namespace BoilerWebApiCore.Controllers
             _repo = repo;
         }
 
-        // GET api/product/1
         [HttpGet]
         public IActionResult Get([FromQuery] int id)
         {
