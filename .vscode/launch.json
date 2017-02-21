@@ -8,7 +8,7 @@
             "preLaunchTask": "build",
             "program": "${workspaceRoot}/BoilerWebApiCore/bin/Debug/netcoreapp1.0/BoilerWebApiCore.dll",
             "args": [],
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceRoot}/BoilerWebApiCore",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
