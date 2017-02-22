@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using BoilerWebApiCore.Shared;
 using BoilerWebApiCore.Repository;
 #if DEBUG
 using Swashbuckle.AspNetCore.Swagger;
@@ -29,10 +28,7 @@ namespace BoilerWebApiCore
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(typeof(GlobalExceptionHandler));
-            });
+            services.AddMvc();
 
             // Add our repository type
             services.AddSingleton<IProductRepo, ProductRepo>();
@@ -49,6 +45,9 @@ namespace BoilerWebApiCore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
+
+            string verbosity = $"/api/error/{env.IsDevelopment()}";
+            app.UseExceptionHandler(verbosity);
 
             app.UseFileServer(new FileServerOptions
             {

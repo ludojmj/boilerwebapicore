@@ -82,6 +82,9 @@ $ dotnet run
   * **api/product/async**  { Id = "0", Lib = "Label1" }
     >  ==> POST OK
 
+* ErrorController isDevelopment=True or False
+    >  ==> Detailed exception message if isDevelopment=True
+
 
 #### BoilerWebApiCore/Repository
 
@@ -95,15 +98,9 @@ $ dotnet run
 #### BoilerWebApiCore/Models
 
 * Product.cs
-
+* ErrorContent.cs
 
 #### BoilerWebApiCore/Shared
 
-* ErrorContent.cs
-  > ==> Formatted message object { Message, MessageDetail }
-
 * BusinessException.cs : Exception
   > ==> Voluntary BusinessException
-
-* GlobalExceptionHandler.cs : ExceptionHandler
-  >  ==> Exception shielding + logging

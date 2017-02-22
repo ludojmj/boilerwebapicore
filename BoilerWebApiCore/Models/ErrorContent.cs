@@ -1,4 +1,4 @@
-﻿namespace BoilerWebApiCore.Shared
+﻿namespace BoilerWebApiCore.Models
 {
     public class ErrorContent
     {
