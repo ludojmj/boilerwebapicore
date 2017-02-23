@@ -7,6 +7,7 @@ namespace BoilerWebApiCore.Controllers
     [Route("api/[controller]/{isDevelopment}")]
     public class ErrorController : Controller
     {
+        [HttpGet]
         public IActionResult Get(bool isDevelopment)
         {
             var error = new ErrorContent
