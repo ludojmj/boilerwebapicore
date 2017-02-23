@@ -83,7 +83,9 @@ $ dotnet run
     >  ==> POST OK
 
 * ErrorController isDevelopment=True or False
-    >  ==> Detailed exception message if isDevelopment=True
+  * **api/error/{isDevelopment}**
+    >  ==> Detailed exception message if isDevelopment==True
+    >  ==> Generic message if isDevelopment==False
 
 
 #### BoilerWebApiCore/Repository
@@ -103,4 +105,4 @@ $ dotnet run
 #### BoilerWebApiCore/Shared
 
 * BusinessException.cs : Exception
-  > ==> Voluntary BusinessException
+  > ==> Voluntary BusinessException thrown in order to display business information to user

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Diagnostics;
 using BoilerWebApiCore.Models;
 using BoilerWebApiCore.Shared;
 
@@ -17,28 +18,28 @@ namespace BoilerWebApiCore.Controllers
         [HttpPost]
         public IActionResult Get(bool isDevelopment)
         {
-            var error = new ErrorContent
+            var error = new GenericError
             {   // Default: We won't share any information publicly
-                Message = "An error occured.",
-                MessageDetail = "An error occured. Please try again later."
+                Message = "An error occured. Please try again later."
             };
 
-            var feature = HttpContext.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+            var feature = HttpContext.Features.Get<IExceptionHandlerFeature>();
 
             var businessException = feature == null ? null : feature.Error as BusinessException;
 
-            if (businessException == null)
+            if (businessException != null)
             {
-                if (isDevelopment)
-                {   // Bug in development: We share detailed exception information publicly
-                    return new JsonResult(feature.Error) { StatusCode = 409 };
-                }
+                error.Message = feature.Error.Message;
+                feature = null;
+                return new JsonResult(error) { StatusCode = 409 };
             }
-            else
+            if (isDevelopment)
             {
-                // Business exception: We send the specified message
-                error.MessageDetail = feature.Error.Message;
+                // Development: We share detailed exception information publicly
+                return new JsonResult(feature.Error) { StatusCode = 409 };
             }
+
+            // Default message
             return new JsonResult(error) { StatusCode = 409 };
         }
     }
