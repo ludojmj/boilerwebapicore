@@ -12,7 +12,6 @@ namespace BoilerWebApiCore.UnitTest
 {
     public class TestProduct
     {
-
         private Mock<IProductRepo> _mockService;
         private readonly IList<Product> _dataSource = new AppDb().AppTable;
         private readonly string _firstValue = new AppDb().AppTable.First().Id;

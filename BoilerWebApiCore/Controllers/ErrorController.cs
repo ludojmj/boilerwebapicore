@@ -1,45 +1,41 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Diagnostics;
 using BoilerWebApiCore.Models;
-using BoilerWebApiCore.Shared;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BoilerWebApiCore.Controllers
 {
     /// <summary>
     /// Exception handling
     /// </summary>
-    [Route("api/[controller]/{isDevelopment}")]
+    [Route("api/[controller]")]
     public class ErrorController : Controller
     {
+        private readonly IHostingEnvironment _env;
+
+        public ErrorController(IHostingEnvironment env)
+        {
+            _env = env;
+        }
+
         // Swagger needs an explicit HttpMethod
         // And UseExceptionHandler middleware requires HttpGet *AND* HttpPost according to source controllers
         // (and probably HttpPut, HttpDelete, ... But since there are not used in other controllers, we won't set them) 
         [HttpGet]
         [HttpPost]
-        public IActionResult Get(bool isDevelopment)
+        public IActionResult Get()
         {
-            var error = new GenericError
+            dynamic error = new GenericError
             {   // Default: We won't share any information publicly
                 Message = "An error occured. Please try again later."
             };
 
-            var feature = HttpContext.Features.Get<IExceptionHandlerFeature>();
-
-            var businessException = feature == null ? null : feature.Error as BusinessException;
-
-            if (businessException != null)
-            {
-                error.Message = feature.Error.Message;
-                feature = null;
-                return new JsonResult(error) { StatusCode = 409 };
-            }
-            if (isDevelopment)
+            if (_env.IsDevelopment())
             {
                 // Development: We share detailed exception information publicly
-                return new JsonResult(feature.Error) { StatusCode = 409 };
+                error = HttpContext.Features.Get<IExceptionHandlerFeature>().Error;
             }
 
-            // Default message
             return new JsonResult(error) { StatusCode = 409 };
         }
     }

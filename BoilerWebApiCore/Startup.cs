@@ -4,9 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BoilerWebApiCore.Repository;
-#if DEBUG
+using BoilerWebApiCore.Shared;
 using Swashbuckle.AspNetCore.Swagger;
-#endif
 
 namespace BoilerWebApiCore
 {
@@ -28,27 +27,25 @@ namespace BoilerWebApiCore
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(GenericExceptionHandler));
+            });
 
             // Add our repository type
             services.AddSingleton<IProductRepo, ProductRepo>();
             services.AddSingleton<IOtherProductRepo, OtherProductRepo>();
-#if DEBUG
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "BoilerWebApiCore", Version = "v1" });
             });
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
-
-            string verbosity = $"/api/error/{env.IsDevelopment()}";
-            app.UseExceptionHandler(verbosity);
-
+            app.UseExceptionHandler("/api/error");
             app.UseFileServer(new FileServerOptions
             {
                 EnableDirectoryBrowsing = true,
@@ -58,16 +55,17 @@ namespace BoilerWebApiCore
             app.UseStaticFiles();
             app.UseMvc();
 
-#if DEBUG
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUi(c =>
+            if (env.IsDevelopment())
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BoilerWebApiCore");
-            });
-#endif
+                // Enable middleware to serve generated Swagger as a JSON endpoint.
+                app.UseSwagger();
+
+                // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+                app.UseSwaggerUi(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BoilerWebApiCore");
+                });
+            }
         }
     }
 }
