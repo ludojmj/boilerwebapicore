@@ -45,7 +45,14 @@ namespace BoilerWebApiCore
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddFile(Configuration.GetSection("Logging"));
-            app.UseExceptionHandler("/api/error");
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+               app.UseExceptionHandler("/api/error");
+            }
             app.UseFileServer(new FileServerOptions
             {
                 EnableDirectoryBrowsing = true,
