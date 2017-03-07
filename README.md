@@ -67,7 +67,6 @@ $ dotnet run
   * **api/product/async**?id=0
     >  ==> GET OK
 
-
 * OtherProductController input.Id="1" => KO
   * **api/otherproduct** { Id = "1", Lib = "Label1" }
     >  ==> POSTT KO (unintentional System.DivideByZeroException)
@@ -82,10 +81,9 @@ $ dotnet run
   * **api/product/async**  { Id = "0", Lib = "Label1" }
     >  ==> POST OK
 
-* ErrorController isDevelopment=True or False
-  * **api/error/{isDevelopment}**
-    >  ==> Detailed exception message if isDevelopment==True
-    >  ==> Generic message if isDevelopment==False
+* ErrorController
+  * **api/error**
+    >  ==> Generic message displayed because of a bug in application
 
 
 #### BoilerWebApiCore/Repository
@@ -102,7 +100,14 @@ $ dotnet run
 * Product.cs
 * ErrorContent.cs
 
+
 #### BoilerWebApiCore/Shared
 
 * BusinessException.cs : Exception
-  > ==> Voluntary BusinessException thrown in order to display business information to user
+    >  ==> Voluntary BusinessException thrown wherever in application in order to display a business message to user
+
+* GenericExceptionHandler : IExceptionFilter
+    >  ==> Displaying a business message to user in case of BusinessException **(MVC)**
+
+    >  ==> Delegating logging and displaying a generic message in ErrorController **(AspNet)**
+ 
