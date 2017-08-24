@@ -1,5 +1,5 @@
-# [boilerwebapicore](https://github.com/ludojmj/boilerwebapicore)
-## .NET Core 1.0.0-rc4-004771 WebApi
+﻿# [boilerwebapicore](https://github.com/ludojmj/boilerwebapicore)
+## .NET Core 2.0 WebApi
   - Self Hosted: BoilerWebApiCore project
 ```
 $ git clone https://github.com/ludojmj/boilerwebapicore.git
@@ -28,16 +28,19 @@ $ export ASPNETCORE_ENVIRONMENT=Development
 $ dotnet run
 ```
 
-* Front-end:
-  * wwwroot/index.html + index.js + index.css
+* Front-end code:
+  * BoilerWebApiCore/wwwroot/index.html + index.js + index.css
 
-* Back-end:
-  * Controllers/ProductController.cs
-  * Controllers/OtherProductController.cs
+* Back-end code:
+  * BoilerWebApiCore/Controllers/ProductController.cs
+  * BoilerWebApiCore/Controllers/OtherProductController.cs
+
+* Automatic logs settings:
+  * BoilerWebApiCore/appsettings.json
 
 ## Swagger
 * Launch the http server:
-  * dotnet bin/Debug/netcoreapp1.0/**BoilerWebApiCore.dll**
+  * dotnet bin/Debug/netcoreapp2.0/**BoilerWebApiCore.dll**
 
 * Open the url:
   * http://localhost:5000/swagger
