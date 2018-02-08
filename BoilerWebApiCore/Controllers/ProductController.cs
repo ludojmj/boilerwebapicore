@@ -7,8 +7,8 @@ using BoilerWebApiCore.Repository;
 namespace BoilerWebApiCore.Controllers
 {
     /// <summary>
-    /// Test our user message when id == 1
-    /// Test normal operation when id != 1
+    /// Test business error if businessError parameter == 1
+    /// Normal operation if businessError parameter == 0
     /// </summary>
     [Route("api/[controller]")]
     public class ProductController : Controller
@@ -21,17 +21,17 @@ namespace BoilerWebApiCore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get([FromQuery] int id)
+        public IActionResult Get([FromQuery] int businessError)
         {
-            IList<Product> result = _repo.GetProductsFromRepo(id);
+            IList<Product> result = _repo.GetProductsFromRepo(businessError);
             return Ok(result);
         }
 
         [HttpGet]
         [Route("async")]
-        public async Task<IActionResult> GetAsync([FromQuery] int id)
+        public async Task<IActionResult> GetAsync([FromQuery] int businessError)
         {
-            IList<Product> result = await _repo.GetProductsFromRepoAsync(id).ConfigureAwait(false);
+            IList<Product> result = await _repo.GetProductsFromRepoAsync(businessError).ConfigureAwait(false);
             return Ok(result); ;
         }
     }

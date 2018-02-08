@@ -14,8 +14,7 @@ namespace BoilerWebApiCore.UnitTest
     {
         private Mock<IProductRepo> _mockService;
         private readonly IList<Product> _dataSource = new AppDb().AppTable;
-        private readonly string _firstValue = new AppDb().AppTable.First().Id;
-        private readonly int _errorValue = 1;
+        private readonly string _firstValue = new AppDb().AppTable.First().Name;
 
         /// <summary>
         /// Test ProductController
@@ -29,12 +28,12 @@ namespace BoilerWebApiCore.UnitTest
             ProductController controller = new ProductController(_mockService.Object);
 
             // Act
-            IActionResult actionResult = controller.Get(int.Parse(_firstValue));
+            IActionResult actionResult = controller.Get(0);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
             var contentResult = Assert.IsType<List<Product>>(okResult.Value);
-            Assert.Equal(_firstValue, contentResult.ToArray()[0].Id);
+            Assert.Equal(_firstValue, contentResult.ToArray()[0].Name);
         }
 
         /// <summary>
@@ -47,9 +46,9 @@ namespace BoilerWebApiCore.UnitTest
             IProductRepo service = new ProductRepo();
 
             // act
-            IList<Product> test = service.GetProductsFromRepo(int.Parse(_firstValue));
-            string result = test.First(x => x.Id == _firstValue).Lib;
-            string expected = _dataSource.First(x => x.Id == _firstValue).Lib;
+            IList<Product> test = service.GetProductsFromRepo(0);
+            string result = test.First(x => x.Name == _firstValue).Price;
+            string expected = _dataSource.First(x => x.Name == _firstValue).Price;
 
             // assert
             Assert.Equal(result, expected);
@@ -63,7 +62,7 @@ namespace BoilerWebApiCore.UnitTest
         {
             string message = "Human message for my app exception.";
             IProductRepo test = new ProductRepo();
-            var ex = Assert.Throws<BusinessException>(() => test.GetProductsFromRepo(_errorValue));
+            var ex = Assert.Throws<BusinessException>(() => test.GetProductsFromRepo(1));
             Assert.Equal(message, ex.Message);
         }
     }

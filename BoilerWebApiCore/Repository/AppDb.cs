@@ -7,9 +7,12 @@ namespace BoilerWebApiCore.Repository
     {
         public IList<Product> AppTable => new List<Product>
         {
-            new Product { Id = "41", Lib = "Label1" },
-            new Product { Id = "42", Lib = "Label2" },
-            new Product { Id = "43", Lib = "Label3" }
+            new Product {Category = "Sporting Goods", Price = "$49.99", Stocked = true, Name = "Football"},
+            new Product {Category = "Sporting Goods", Price = "$9.99", Stocked = true, Name = "Baseball"},
+            new Product {Category = "Sporting Goods", Price = "$29.99", Stocked = false, Name = "Basketball"},
+            new Product {Category = "Electronics", Price = "$99.99", Stocked = true, Name = "iPod Touch"},
+            new Product {Category = "Electronics", Price = "$399.99", Stocked = false, Name = "iPhone 5"},
+            new Product {Category = "Electronics", Price = "$199.99", Stocked = true, Name = "Nexus 7"}
         };
     }
 }

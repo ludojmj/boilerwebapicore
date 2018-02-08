@@ -26,6 +26,9 @@ namespace BoilerWebApiCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add CORS.
+            services.AddCors();
+
             // Add framework services.
             services.AddMvc(options =>
             {
@@ -51,7 +54,7 @@ namespace BoilerWebApiCore
             }
             else
             {
-               app.UseExceptionHandler("/api/error");
+                app.UseExceptionHandler("/api/error");
             }
             app.UseFileServer(new FileServerOptions
             {
@@ -60,6 +63,11 @@ namespace BoilerWebApiCore
                 DefaultFilesOptions = { DefaultFileNames = { "index.html" } }
             });
             app.UseStaticFiles();
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
             app.UseMvc();
 
             if (env.IsDevelopment())

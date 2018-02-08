@@ -7,8 +7,8 @@ using BoilerWebApiCore.Repository;
 namespace BoilerWebApiCore.Controllers
 {
     /// <summary>
-    /// Test bugg in app if input.Id == "1"
-    /// Normal operation if input.Id != "1"
+    /// Test bug in app if input.Name == "1"
+    /// Normal operation if input.Name == "0"
     /// </summary>
     [Route("api/[controller]")]
     public class OtherProductController : Controller

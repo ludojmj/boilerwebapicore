@@ -21,7 +21,7 @@
     });
 }
 
-function callPost(obj, hasBug) {
+function callPost(obj, setBug) {
     var results = document.getElementById("results");
     obj.addEventListener("click", function (e) {
         var oReq = new XMLHttpRequest();
@@ -40,7 +40,7 @@ function callPost(obj, hasBug) {
         oReq.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
         oReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         oReq.setRequestHeader("x-vanillaAjaxWithoutjQuery-version", "1.0");
-        oReq.send(hasBug ? "{'Id': '1'}" : "{'Id': '0'}");
+        oReq.send(setBug ? "{'Name': '1'}" : "{'Name': '0'}");
     });
 }
 

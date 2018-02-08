@@ -5,8 +5,8 @@ using BoilerWebApiCore.Models;
 namespace BoilerWebApiCore.Repository
 {
     /// <summary>
-    /// Test bugg in app if input.Id == "1"
-    /// Normal operation if input.Id != "1"
+    /// Bug in application if input.Name == "1"
+    /// Normal operation if input.Name != "1"
     /// </summary>
     public class OtherProductRepo : IOtherProductRepo
     {
@@ -14,8 +14,8 @@ namespace BoilerWebApiCore.Repository
         
         public IList<Product> GetOtherProductsFromRepo(Product input)
         {
-            if (input.Id == "1")
-            {   // Test bugg in app if input.Id != "0"
+            if (input.Name == "1")
+            {   // Bug in application since input.Name == "1"
                 int a = 0;
                 int b = 10;
                 var c = b / a;

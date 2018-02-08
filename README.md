@@ -56,32 +56,32 @@ $ dotnet run
 
 #### BoilerWebApiCore/Controllers
 
-* ProductController id=1 => KO
-  * **api/product**?id=1
+* ProductController businessError=1 => KO
+  * **api/product**?businessError=1
     >  ==> GET KO (intentional BoilerWebApiCore.BusinessException)
 
-  * **api/product/async**?id=1
+  * **api/product/async**?businessError=1
     >  ==> GET KO (intentional BoilerWebApiCore.BusinessException)
 
-* ProductController id=0 => OK
-  * **api/product**?id=0
+* ProductController businessError=0 => OK
+  * **api/product**?businessError=0
     >  ==> GET OK
 
-  * **api/product/async**?id=0
+  * **api/product/async**?businessError=0
     >  ==> GET OK
 
-* OtherProductController input.Id="1" => KO
-  * **api/otherproduct** { Id = "1", Lib = "Label1" }
+* OtherProductController input.Name="1" => KO
+  * **api/otherproduct** { Name = "1", ... }
     >  ==> POSTT KO (unintentional System.DivideByZeroException)
 
-  * **api/product/async**  { Id = "1", Lib = "Label1" }
+  * **api/product/async**  { Name = "1", ... }
     >  ==> POST KO (unintentional System.DivideByZeroException)
 
-* OtherProductController input.Id="0" => OK
-  * **api/product**  { Id = "0", Lib = "Label1" }
+* OtherProductController input.Name="0" => OK
+  * **api/product**  { Name = "0", ... }
     >  ==> POST OK
 
-  * **api/product/async**  { Id = "0", Lib = "Label1" }
+  * **api/product/async**  { Name = "0", ... }
     >  ==> POST OK
 
 * ErrorController

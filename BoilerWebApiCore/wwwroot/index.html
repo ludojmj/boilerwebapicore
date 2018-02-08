@@ -14,13 +14,13 @@
     <p>
         Sync methods
     </p>
-    <button class="ko" id="productKo" data-url="api/product?id=1">GET: Sync KO (business error - Test our user message when id == 1)</button>
+    <button class="ko" id="productKo" data-url="api/product?businessError=1">GET: Sync KO (business error - Test our user message when input == 1)</button>
     <br />
     <br />
-    <button class="ok" id="productOk" data-url="api/product?id=0">GET: Sync OK</button>
+    <button class="ok" id="productOk" data-url="api/product?businessError=0">GET: Sync OK</button>
     <br />
     <br />
-    <button class="ko" id="otherProductKo" data-url="api/otherproduct">POST: Sync KO (bug => divide exception - Test bugg in app if input.Id == "1")</button>
+    <button class="ko" id="otherProductKo" data-url="api/otherproduct">POST: Sync KO (bug => divide exception - Test bug in app when input.Name == "1")</button>
     <br />
     <br />
     <button class="ok" id="otherProductOk" data-url="api/otherproduct">POST: Sync OK</button>
@@ -32,13 +32,13 @@
     <p>
         Async methods
     </p>
-    <button class="ko" id="productAsyncKo" data-url="api/product/async?id=1">GET: Async KO (business error - Test our user message when id == 1)</button>
+    <button class="ko" id="productAsyncKo" data-url="api/product/async?businessError=1">GET: Async KO (business error - Test our user message when input == 1)</button>
     <br />
     <br />
-    <button class="ok" id="productAsyncOk" data-url="api/product/async?id=0">GET: Async OK</button>
+    <button class="ok" id="productAsyncOk" data-url="api/product/async?businessError=0">GET: Async OK</button>
     <br />
     <br />
-    <button class="ko" id="otherProductAsyncKo" data-url="api/otherproduct/async">POST: Async KO (bug => divide exception - Test bugg in app if input.Id == "1")</button>
+    <button class="ko" id="otherProductAsyncKo" data-url="api/otherproduct/async">POST: Async KO (bug => divide exception - Test bug in app when input.Name == "1")</button>
     <br />
     <br />
     <button class="ok" id="otherProductAsyncOk" data-url="api/otherproduct/async">POST: Async OK</button>

@@ -15,7 +15,7 @@ namespace BoilerWebApiCore.UnitTest
         private Mock<IOtherProductRepo> _mockService;
         private readonly IList<Product> _dataSource = new AppDb().AppTable;
         private readonly Product _firstValue = new AppDb().AppTable.First();
-        private readonly Product _errorValue = new Product() { Id = "1", Lib = "Label1" };
+        private readonly Product _errorValue = new Product() { Name = "1" };
 
         /// <summary>
         /// Test OtherProductController
@@ -34,8 +34,8 @@ namespace BoilerWebApiCore.UnitTest
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
             var contentResult = Assert.IsType<List<Product>>(okResult.Value);
-            Assert.Equal(_firstValue.Id, contentResult.ToArray()[0].Id);
-            Assert.Equal(_firstValue.Lib, contentResult.ToArray()[0].Lib);
+            Assert.Equal(_firstValue.Name, contentResult.ToArray()[0].Name);
+            Assert.Equal(_firstValue.Price, contentResult.ToArray()[0].Price);
         }
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace BoilerWebApiCore.UnitTest
 
             // act
             IList<Product> test = service.GetOtherProductsFromRepo(_firstValue);
-            string result = test.First(x => x.Id == _firstValue.Id).Lib;
-            string expected = _dataSource.First(x => x.Id == _firstValue.Id).Lib;
+            string result = test.First(x => x.Name == _firstValue.Name).Price;
+            string expected = _dataSource.First(x => x.Name == _firstValue.Name).Price;
 
             // assert
             Assert.Equal(result, expected);
